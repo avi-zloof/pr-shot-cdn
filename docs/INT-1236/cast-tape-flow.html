@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atrium orchestration — Cast → Tape</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #122018;
+      --muted: #4d6356;
+      --line: rgba(20, 48, 32, 0.12);
+      --green: #1c7a4a;
+      --green-deep: #0f4f30;
+      --mint: #dff3e7;
+      --cream: #f4faf6;
+      --paper: #fbfffc;
+      --amber: #c9851a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Source Sans 3", Georgia, sans-serif;
+      background:
+        radial-gradient(900px 420px at 10% -10%, #d8f0e2 0%, transparent 55%),
+        radial-gradient(700px 380px at 100% 0%, #e8f5ec 0%, transparent 50%),
+        linear-gradient(180deg, #eef8f1 0%, var(--cream) 240px, #f7fbf8 100%);
+      line-height: 1.55;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 72px; }
+    .kicker {
+      display: inline-flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      margin-bottom: 14px;
+    }
+    .kicker span {
+      background: var(--mint);
+      border: 1px solid var(--line);
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+    h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      line-height: 1.12;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 1.12rem;
+      max-width: 38em;
+    }
+    .audience {
+      border-left: 4px solid var(--amber);
+      padding: 12px 16px;
+      margin: 0 0 28px;
+      background: #fff8ea;
+      border-radius: 0 12px 12px 0;
+      color: #5a430f;
+    }
+    .audience strong { color: #3d2e0a; }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .chip strong { color: var(--green-deep); }
+    section {
+      margin: 0 0 18px;
+      padding: 24px;
+      background: color-mix(in srgb, var(--paper) 92%, white);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(16, 40, 26, 0.05);
+    }
+    h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.3rem;
+      margin: 0 0 10px;
+      color: var(--green-deep);
+    }
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+    ul { margin: 8px 0 0; padding-left: 1.15rem; }
+    li { margin: 7px 0; }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-top: 16px;
+    }
+    .flow b {
+      font-weight: 700;
+      background: var(--mint);
+      color: var(--green-deep);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.92rem;
+    }
+    .flow i {
+      font-style: normal;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .roles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .role {
+      padding: 14px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #f2faf5, #ffffff);
+      border: 1px solid var(--line);
+    }
+    .role h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      color: var(--green-deep);
+    }
+    .role p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em;
+      background: var(--mint);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+    .example {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #f0f7f3;
+      border: 1px dashed var(--line);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.86rem;
+      color: var(--green-deep);
+      overflow-x: auto;
+    }
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+    a { color: var(--green); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="kicker">
+      <span>INT-1236</span>
+      <span>Orchestration upgrade</span>
+      <span>Atrium Core</span>
+    </div>
+    <h1>Cast → Tape</h1>
+    <p class="lede">
+      An upgrade to how Atrium deliveries are planned and closed — not a product UI release.
+      This note is only about the orchestration flow.
+    </p>
+
+    <div class="audience">
+      <strong>Who should read this:</strong> anyone who runs or reviews agent deliveries —
+      orchestrators, developers, validators, auditors, and teammates who need to understand
+      why a run named a cast and left a tape. If you only care about app features, you can skip this.
+    </div>
+
+    <div class="hero-meta">
+      <div class="chip"><strong>Flow</strong> Plan → Cast → Spawn → … → Tape → Audit</div>
+      <div class="chip"><strong>PR = what</strong> · <strong>Tape = how</strong></div>
+    </div>
+
+    <section>
+      <h2>What changed</h2>
+      <p>
+        The shared orchestration path now makes two phases explicit:
+        <strong>Cast</strong> (who runs the ticket) and <strong>Tape</strong> (how the run actually went).
+        Thin tickets can cast <code>{Dev}</code> only; parity and delivery-risk tickets cast more roles.
+        Auditor may require Tape before merge — Auditor does not write the Tape.
+      </p>
+      <div class="flow">
+        <b>Plan</b><i>→</i><b>Cast</b><i>→</i><b>Spawn</b><i>→</i><b>…</b><i>→</i><b>Tape</b><i>→</i><b>Audit</b>
+      </div>
+    </section>
+
+    <section>
+      <h2>What is Cast?</h2>
+      <p>
+        <strong>Cast</strong> is the planner output after Plan and before anyone is spawned.
+        The orchestrator names the agent team for this ticket. It is not optional ceremony —
+        each role must own a failable check, not opinions.
+      </p>
+      <div class="roles">
+        <div class="role">
+          <h3>Dev</h3>
+          <p>Implements in the feature worktree. Always present for repo work.</p>
+        </div>
+        <div class="role">
+          <h3>Validator</h3>
+          <p>Gap-check against a source of truth (parity, contracts, Me = token owner). Use when the ticket mirrors another surface.</p>
+        </div>
+        <div class="role">
+          <h3>Auditor</h3>
+          <p>Delivery gate only: branch, UI evidence, tests. Not the same as Validator.</p>
+        </div>
+        <div class="role">
+          <h3>Security / Visual</h3>
+          <p>Only when the ticket needs them — not default cast members.</p>
+        </div>
+      </div>
+      <p style="margin-top:14px">
+        Default for parity tickets (iOS similar to web, Me/Project scopes, shared API):
+        <strong>Cast: Dev + Validator</strong>, then Auditor.
+      </p>
+    </section>
+
+    <section>
+      <h2>What is Tape?</h2>
+      <p>
+        <strong>Tape</strong> is the orchestrator’s last story phase — a compact run record of
+        <em>how</em> the delivery happened. The product PR describes <em>what</em> shipped;
+        the Tape describes the path: cast, attempts, gates, and outcome.
+      </p>
+      <ul>
+        <li>Written after the PR is ready (before or after Auditor)</li>
+        <li>Artifact: <code>docs/runs/&lt;ISSUE_KEY&gt;-tape.md</code> and/or a short chat summary</li>
+        <li>Auditor may require Tape presence; Auditor does <strong>not</strong> author Tape</li>
+      </ul>
+      <div class="example">
+Plan ✓ → Cast{Dev,Validator} → Attempt1 … ✗ → Attempt2 … ✓ → Gate ✓ → Out
+      </div>
+    </section>
+
+    <section>
+      <h2>Why it matters</h2>
+      <ul>
+        <li><strong>Clear ownership</strong> — you know who was cast before work starts</li>
+        <li><strong>Recoverable history</strong> — Tape reconstructs the run without mining chat</li>
+        <li><strong>Honest gates</strong> — Auditor checks delivery; Validator checks truth; neither blurs into the other</li>
+      </ul>
+    </section>
+
+    <footer>
+      Jira <a href="https://eitanmedical.atlassian.net/browse/INT-1236">INT-1236</a>
+      · Locked in atrium-core · Epic INT-153
+    </footer>
+  </div>
+</body>
+</html>
